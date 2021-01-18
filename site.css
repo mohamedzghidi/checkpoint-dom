@@ -1,0 +1,29 @@
+.centered{
+    text-align: center;
+}
+
+.tableCentered{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:25px;
+    margin-bottom: 25px;
+}
+
+.articleTitle{
+    font-weight: bold;
+}
+
+.totalTitle{
+    font-size: 25px;
+    font-weight: bold;
+    color:green;
+}
+
+.zoom:hover {
+    transform: scale(1.5); 
+}
+
+.qte{
+    width: 50px;
+    text-align: center;
+}

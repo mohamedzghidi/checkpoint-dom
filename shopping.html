@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="site.css">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="centered">
+        <h1>Shopping Cart</h1>
+        <table border="1" style="width: 90%;" class="tableCentered">
+            <tr class="articleTitle">
+                <td>
+                    Soccer Shoes (Price: <span id="prixShoes">54</span>$)
+                </td>
+                <td>
+                    Soccer Ball (Price: <span id="prixBall">14.5</span>$)
+                </td>
+                <td>
+                    Soccer Shirt (Price: <span id="prixShirt">17.5</span>$)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <img src="img/shoes.jpg" alt="" height="65%" class="zoom">
+                </td>
+                <td>
+                    <img src="img/ball.jpg" alt="" height="65%" class="zoom">
+                </td>
+                <td>
+                    <img src="img/shirt.jpg" alt="" height="50%" class="zoom">
+                </td>
+            </tr>
+
+            <tr class="articleTitle">
+                <td>
+                    <table border="1" class="tableCentered">
+                        <tr>
+                            <td><input id="qteShoes" type="text" value="0" class="qte" disabled></td>
+                            <td><button onclick="substract();">-</button></td>
+                            <td><button onclick="add();">+</button></td>
+                            <td style="width: 75px;"><label id="partielShoes">0</label></td>
+                            <td>
+                                <button onclick="delet();"> <span class="fa fa-trash"
+                                        style="color: red;"></span></button>
+                            </td>
+                            <td>
+                                <button id="heartShoes" name="empty" onclick="toggleHeart();"><span
+                                        class="fa fa-heart-o"></span></button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1" class="tableCentered">
+                        <tr>
+                            <td><input id="qteball" type="text" value="0" class="qte" disabled></td>
+                            <td><button onclick="substract1();">-</button></td>
+                            <td><button onclick="add1();">+</button></td>
+                            <td style="width: 75px;"><label id="partielball">0</label></td>
+                            <td><button onclick="delet1();"> <span class="fa fa-trash"
+                                        style="color: red;"></span></button></td>
+                            <td><button id="heartball" name="empty" onclick="toggleHeart1();"><span
+                                        class="fa fa-heart-o"></span></button>
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1" class="tableCentered">
+                        <tr>
+                            <td><input id="qteshirt" type="text" value="0" class="qte" disabled></td>
+                            <td><button onclick="substract2();">-</button></td>
+                            <td><button onclick="add2();">+</button></td>
+                            <td style="width: 75px;"><label id="partielshirt">0</label></td>
+                            <td><button onclick="delet2();"><span class="fa fa-trash"
+                                        style="color: red;"></span></button></td>
+                            <td><button id="heartshirt" name="empty" onclick="toggleHeart2();"><span
+                                        class="fa fa-heart-o"></span></button></td>
+
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="totalTitle">
+                <td colspan="3">
+                    <label id="Tot"> Total=? </label>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+
+
+    <script>
+        function substract() {
+            let txtQte = document.getElementById("qteShoes");
+            if (txtQte.value == 0) {
+                alert("La quantité ne peut pas etre négtive!");
+            } else {
+                txtQte.value--;
+
+                let spnPrice = document.getElementById("prixShoes");
+                let unitPrice = spnPrice.innerText;
+                let partialPrice = unitPrice * txtQte.value;
+                document.getElementById("partielShoes").innerText = partialPrice ;
+                updateTotal();
+            }
+        }
+
+        function add() {
+            let txtQte = document.getElementById("qteShoes");
+            txtQte.value++;
+
+            let spnPrice = document.getElementById("prixShoes");
+            let unitPrice = spnPrice.innerText;
+            let partialPrice = unitPrice * txtQte.value;
+            document.getElementById("partielShoes").innerText = partialPrice ;
+            updateTotal();
+        }
+
+        function toggleHeart() {
+            let btnHeart = document.getElementById("heartShoes");
+            let name = btnHeart.getAttribute("name");
+            if (name == "empty") {
+                let content = '<span class="fa fa-heart" style="color:green" >';
+                btnHeart.innerHTML = content;
+                btnHeart.setAttribute("name", "filled");
+            } else {  // Heart is filled
+                let content = '<span class="fa fa-heart-o" >';
+                btnHeart.innerHTML = content;
+                btnHeart.setAttribute("name", "empty");
+            }
+
+        }
+
+        function delet() {
+            document.getElementById("partielShoes").innerHTML = 0 ;
+            document.getElementById("qteShoes").value = 0;
+            updateTotal();
+
+        }
+        function substract1() {
+            let txtQte = document.getElementById("qteball");
+            if (txtQte.value == 0) {
+                alert("La quantité ne peut pas etre négtive!");
+            } else {
+                txtQte.value--;
+
+                let spnPrice = document.getElementById("prixBall");
+                let unitPrice = spnPrice.innerText;
+                let partialPrice = unitPrice * txtQte.value;
+                document.getElementById("partielball").innerText = partialPrice ;
+                updateTotal();
+            }
+        }
+
+        function add1() {
+            let txtQte = document.getElementById("qteball");
+            txtQte.value++;
+
+            let spnPrice = document.getElementById("prixBall");
+            let unitPrice = spnPrice.innerText;
+            let partialPrice = unitPrice * txtQte.value;
+            document.getElementById("partielball").innerText = partialPrice ;
+            updateTotal();
+        }
+
+        function toggleHeart1() {
+            let btnHeart = document.getElementById("heartball");
+            let name = btnHeart.getAttribute("name");
+            if (name == "empty") {
+                let content = '<span class="fa fa-heart" style="color:green" >';
+                btnHeart.innerHTML = content;
+                btnHeart.setAttribute("name", "filled");
+            } else {  // Heart is filled
+                let content = '<span class="fa fa-heart-o" >';
+                btnHeart.innerHTML = content;
+                btnHeart.setAttribute("name", "empty");
+            }
+
+        }
+        function delet1() {
+            document.getElementById("partielball").innerHTML = 0 ;
+            document.getElementById("qteball").value = 0;
+            updateTotal();
+
+        }
+
+        function substract2() {
+            let txtQte = document.getElementById("qteshirt");
+            if (txtQte.value == 0) {
+                alert("La quantité ne peut pas etre négtive!");
+            } else {
+                txtQte.value--;
+
+                let spnPrice = document.getElementById("prixShirt");
+                let unitPrice = spnPrice.innerText;
+                let partialPrice = unitPrice * txtQte.value;
+                document.getElementById("partielshirt").innerText = partialPrice ;
+                updateTotal();
+            }
+        }
+
+        function add2() {
+            let txtQte = document.getElementById("qteshirt");
+            txtQte.value++;
+
+            let spnPrice = document.getElementById("prixShirt");
+            let unitPrice = spnPrice.innerText;
+            let partialPrice = unitPrice * txtQte.value;
+            document.getElementById("partielshirt").innerText = partialPrice ;
+            updateTotal();
+        }
+
+        function toggleHeart2() {
+            let btnHeart = document.getElementById("heartshirt");
+            let name = btnHeart.getAttribute("name");
+            if (name == "empty") {
+                let content = '<span class="fa fa-heart" style="color:green" >';
+                btnHeart.innerHTML = content;
+                btnHeart.setAttribute("name", "filled");
+            } else {  // Heart is filled
+                let content = '<span class="fa fa-heart-o" >';
+                btnHeart.innerHTML = content;
+                btnHeart.setAttribute("name", "empty");
+            }
+
+        }
+        function delet2() {
+            document.getElementById("partielshirt").innerHTML = 0 ;
+            document.getElementById("qteshirt").value = 0;
+            updateTotal();
+
+        }
+        function updateTotal() {
+
+            let totShoes=document.getElementById("partielShoes").innerText;
+            let totBall=document.getElementById("partielball").innerText;
+            let totShirt=document.getElementById("partielshirt").innerText;
+            let total= parseFloat( totShoes)+parseFloat (totBall)+ parseFloat(totShirt) ;
+            document.getElementById("Tot").innerHTML=total + "$";
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>
